@@ -2,7 +2,7 @@ import playBtn from '../images/PlayBtn.png';
 import rewindBtn from '../images/RewindBtn.png';
 import forwardBtn from '../images/ForwardBtn.png';
 import styles from '../css/header.module.css';
-import VolumeSlider from './VolumeSlider';
+import VolumeBtn from '../images/VolumeBtn.png';
 
 export default function AudioControls() {
   return (
@@ -19,8 +19,17 @@ export default function AudioControls() {
         </button>
       </div>
       <div  className={styles.volume}>
-        <VolumeSlider />
+        <VolumeSlider/>
       </div>
+    </div>
+  );
+}
+
+export function VolumeSlider() {
+  return (
+    <div>
+        <img src={VolumeBtn}/>
+        <input type="range" min="0" max="100" step="1"/>
     </div>
   );
 }

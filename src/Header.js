@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchBar from './header-components/SearchBar';
 import AudioControls from './header-components/AudioControls';
 import styles from './css/header.module.css';

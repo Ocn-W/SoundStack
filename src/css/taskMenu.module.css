@@ -61,6 +61,54 @@
     text-shadow: none;
 }
 
+.createPlaylist {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px inset rgb(220, 225, 230);
+    height: 250px;
+    width: 500px;
+    background-color: rgb(240, 248, 255);
+    border-radius: 50px;
+    box-shadow: 0px 5px 25px black;
+}
+
+.createPlaylist p {
+    width: fit-content;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 750;
+    font-size: 25px;
+    color: rgb(131, 155, 180);
+    text-shadow: 0px -1px 0px whitesmoke, 0px 1px 0px grey;
+}
+
+.createPlaylist button {
+    padding: 10px;
+    margin: 0px 10px 20px 10px;
+    border-radius: 25px;
+    border: 1px solid grey;
+    box-shadow: 0px 2px 3px black;
+    cursor: pointer;
+}
+
+.createPlaylist button:active {
+    transition: 0s ease .1s;
+    box-shadow: none;
+}
+
+.createPlaylist input {
+    border: 1px solid grey;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 25px;
+}
+
 
 
 /* Selection Blue */
