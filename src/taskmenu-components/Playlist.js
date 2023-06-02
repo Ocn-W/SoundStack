@@ -1,42 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "../css/taskMenu.module.css";
+import CreatePlaylist from "./CreatePlaylist";
+import SavePlaylist from "./SavePlaylist";
 
 export default function Playlist() {
     const [showCreatePlaylist, isCreateVisible] = useState(false);
-    const [savePlaylist, setPlaylistName] = useState('')
+    const [savePlaylist, isSaving] = useState(false);
+    const [playlistName, setPlaylistName] = useState('');
+    const [userPlaylist, addToPlaylist] = useState([]);
+
 
     function handleClick() {
         isCreateVisible(true);
     }
 
-    function handleSave(event) {
+    function handleInputChange(event) {
         setPlaylistName(event.target.value);
     }
 
-    useEffect(() => {
-        window.localStorage.setItem('PLAYLIST_NAME', JSON.stringify(savePlaylist));
-    }, [savePlaylist])
-
-    useEffect(() => {
-        const data = window.localStorage.getItem('PLAYLIST_NAME');
-        {data !== null && setPlaylistName(JSON.parse(data))}
-    })
+    function handleSave() {
+        isSaving(true);
+        const newPlaylist = {playlistName};
+        addToPlaylist([...userPlaylist, newPlaylist]);
+        console.log('Save Successful! Playlist name is ' + playlistName);
+        handleCancel();
+    }
+    
+    function handleCancel() {
+        isCreateVisible(false);
+    }
 
     return (
       <>
         <div className={styles.playlist}>
           <p>Playlist</p>
           <button onClick={handleClick}>+</button>
-        </div>
-        {showCreatePlaylist && (
-            <div className={styles.createPlaylist}>
-                <p>Playlist Title</p>
-                <input type='text'/>
-                <button onClick={handleSave}>Save</button>
-                <button onClick={() => isCreateVisible(false)}>Cancel</button>
-            </div>
-            
-        )}
+        </div>     
+        {showCreatePlaylist && <CreatePlaylist inputChange={handleInputChange}  onSave={handleSave} onCancel={handleCancel}/>}
+        {savePlaylist && userPlaylist.map(({playlistName}, index) => <SavePlaylist playlistName={playlistName} key={index}/>)}
       </>
     );
 }

@@ -109,6 +109,23 @@
     border-radius: 25px;
 }
 
+.savePlaylist {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    font-weight: 550;
+    font-size: 12px;
+    background-color: rgba(102, 119, 136, 1);
+    color: white;
+    height: fit-content;
+    padding: 1px 0px;
+    margin-bottom: 5px;
+    text-shadow: 0px -1px 0px grey, 0px 1px 0px black;
+}
+
+.savePlaylist:hover {
+    background-color:grey;
+}
+
 
 
 /* Selection Blue */
