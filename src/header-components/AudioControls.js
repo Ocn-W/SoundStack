@@ -9,13 +9,13 @@ export default function AudioControls() {
     <div className={styles.controls}>
       <div className={styles.audiobtns}>
         <button>
-          <img src={rewindBtn} />
+          <img src={rewindBtn} alt='Previous Song'/>
         </button>
         <button>
-          <img src={playBtn} />
+          <img src={playBtn} alt='Play Song'/>
         </button>
         <button>
-          <img src={forwardBtn} />
+          <img src={forwardBtn} alt='Next Song'/>
         </button>
       </div>
       <div  className={styles.volume}>
@@ -28,7 +28,7 @@ export default function AudioControls() {
 export function VolumeSlider() {
   return (
     <div>
-        <img src={VolumeBtn}/>
+        <img src={VolumeBtn} alt='Volume Control'/>
         <input type="range" min="0" max="100" step="1"/>
     </div>
   );
