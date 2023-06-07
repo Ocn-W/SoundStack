@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "../css/taskMenu.module.css";
 import CreatePlaylist from "./CreatePlaylist";
 import SavePlaylist from "./SavePlaylist";
@@ -8,7 +8,7 @@ export default function Playlist() {
     const [savePlaylist, isSaving] = useState(false);
     const [playlistName, setPlaylistName] = useState('');
     const [userPlaylist, addToPlaylist] = useState([]);
-
+    
 
     function handleClick() {
         isCreateVisible(true);
@@ -19,10 +19,10 @@ export default function Playlist() {
     }
 
     function handleSave() {
-        isSaving(true);
         const newPlaylist = {playlistName};
-        addToPlaylist([...userPlaylist, newPlaylist]);
-        console.log('Save Successful! Playlist name is ' + playlistName);
+        isSaving(true);
+        addToPlaylist([newPlaylist, ...userPlaylist]);
+        console.log('Save Sccessful! Playlist name is ' + playlistName);
         handleCancel();
     }
     
@@ -34,14 +34,10 @@ export default function Playlist() {
       <>
         <div className={styles.playlist}>
           <p>Playlist</p>
-          <button onClick={handleClick}>+</button>
+          <button onClick={handleClick} aria-details="Add New Playlist">+</button>
         </div>     
         {showCreatePlaylist && <CreatePlaylist inputChange={handleInputChange}  onSave={handleSave} onCancel={handleCancel}/>}
-        {savePlaylist && userPlaylist.map(({playlistName}, index) => <SavePlaylist playlistName={playlistName} key={index}/>)}
+        {savePlaylist && userPlaylist.map(({playlistName},index) => <SavePlaylist playlistName={playlistName} key={index}/>)}
       </>
     );
 }
-
-//create empty array and store playlist objects
-//playlist objects have name and empty array for songs
-//add song button pushes song to the array inside playlist object

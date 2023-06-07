@@ -1,14 +1,28 @@
-import Welcome from './main-components/Welcome'
 import styles from './css/mainpage.module.css';
+import styles2 from './css/taskMenu.module.css';
+import HomePage from './main-components/HomePage';
+import Playlist from './taskmenu-components/Playlist';
+import {PlaylistContext} from './contexts/PlaylistContext';
+import { useState } from 'react';
 
-function Main() {
+export default function Main() {
+  const [showPlaylist, isPlaylistSelected] = useState(false);
+
   return (
     <>
-      <div className={styles.main}>
-        <Welcome />
+    <PlaylistContext.Provider value={{showPlaylist, isPlaylistSelected}}>
+      <div className={styles2.taskmenu}>
+        <div className={styles2.library}>
+          <p>LIBRARY</p>
+        </div>
+        <div>
+          <Playlist />
+        </div>
       </div>
+      <div className={styles.main}>
+        <HomePage />
+      </div>
+      </PlaylistContext.Provider>
     </>
   );
 }
-
-export default Main;

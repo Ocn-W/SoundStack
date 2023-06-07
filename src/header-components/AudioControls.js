@@ -1,3 +1,4 @@
+import React from 'react';
 import playBtn from '../images/PlayBtn.png';
 import rewindBtn from '../images/RewindBtn.png';
 import forwardBtn from '../images/ForwardBtn.png';
