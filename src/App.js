@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from './Header';
 import Main from './Main';
-import { clientId, clientSecret } from './spotify';
+import { clientId, clientSecret } from './Spotify';
 import { SearchBarResult } from './contexts/SearchBarContext';
 import {PlaylistContext} from './contexts/PlaylistContext';
 import { ListNameContext } from './contexts/PlaylistContext';
