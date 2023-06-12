@@ -7,9 +7,9 @@ export default function Songs({addSong}) {
   
   return (
         <>
-        {songs.map((song) => {
+        {songs.map((song, index) => {
             return (
-            <div className={styles.songCard}>
+            <div className={styles.songCard} key={index}>
                 <img src={song.artwork} alt='Album Artwork'></img>
                 <div className={styles.songInfo}>
                     <p>Song: {song.name}</p>

@@ -14,7 +14,7 @@ function App() {
   const [showSearchResult, isSearching] = useState(false);
   const [showPlaylist, isPlaylistSelected] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
-
+  console.log(`${CLIENT_ID} ${CLIENT_SECRET}`);
   useEffect(() => {
     const authParams = {
       method: "POST",
@@ -25,7 +25,7 @@ function App() {
         "grant_type=client_credentials&client_id=" +
         CLIENT_ID +
         "&client_secret=" +
-        CLIENT_SECRET,
+        CLIENT_SECRET
     };
 
     fetch("https://accounts.spotify.com/api/token", authParams)

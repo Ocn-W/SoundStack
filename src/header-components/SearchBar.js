@@ -18,7 +18,7 @@ export default function SearchBar() {
         method: "GET",
         headers: {
           "Content-Type": "applications/json",
-          "Authorization": "Bearer " + accessToken
+          Authorization: "Bearer " + accessToken
         },
       };
 
