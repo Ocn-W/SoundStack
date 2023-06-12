@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from './Header';
 import Main from './Main';
-import { clientId, clientSecret } from './Spotify';
+import { CLIENT_ID, CLIENT_SECRET } from './Spotify';
 import { SearchBarResult } from './contexts/SearchBarContext';
 import {PlaylistContext} from './contexts/PlaylistContext';
 import { ListNameContext } from './contexts/PlaylistContext';
@@ -23,12 +23,12 @@ function App() {
       },
       body:
         "grant_type=client_credentials&client_id=" +
-        clientId +
+        CLIENT_ID +
         "&client_secret=" +
-        clientSecret,
+        CLIENT_SECRET,
     };
 
-    fetch("http://accounts.spotify.com/api/token", authParams)
+    fetch("https://accounts.spotify.com/api/token", authParams)
       .then((result) => result.json())
       .then((data) => setAccessToken(data.access_token));
   }, []);
