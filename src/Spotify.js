@@ -1,0 +1,5 @@
+export const CLIENT_ID = "ef27234bd8f34901a3a9aa2aa27faff9"
+export const CLIENT_SECRET = "2dc03453f379443cbcabd7b8f82aa5e5"
+export const REDIRECT_URI = "http://localhost:3000"
+export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
+export const RESPONSE_TYPE = "token"

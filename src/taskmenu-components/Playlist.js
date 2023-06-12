@@ -1,33 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../css/taskMenu.module.css";
 import CreatePlaylist from "./CreatePlaylist";
 import SavePlaylist from "./SavePlaylist";
+import { ListNameContext } from "../contexts/PlaylistContext";
 
 export default function Playlist() {
     const [showCreatePlaylist, isCreateVisible] = useState(false);
     const [savePlaylist, isSaving] = useState(false);
-    const [playlistName, setPlaylistName] = useState('');
     const [userPlaylist, addToPlaylist] = useState([]);
+    const {setPlaylistName} = useContext(ListNameContext);
+    const {playlistName} = useContext(ListNameContext);
     
 
     function handleClick() {
-        isCreateVisible(true);
+      isCreateVisible(true);
     }
 
     function handleInputChange(event) {
-        setPlaylistName(event.target.value);
+      setPlaylistName(event.target.value);
     }
 
     function handleSave() {
-        const newPlaylist = {playlistName};
-        isSaving(true);
-        addToPlaylist([newPlaylist, ...userPlaylist]);
-        console.log('Save Sccessful! Playlist name is ' + playlistName);
-        handleCancel();
+      isSaving(true);
+      addToPlaylist([{playlistName}, ...userPlaylist]);
+      console.log('Save Sccessful! Playlist name is ' + playlistName);
+      console.log(userPlaylist);
+      handleCancel();
     }
     
     function handleCancel() {
-        isCreateVisible(false);
+      isCreateVisible(false);
     }
 
     return (

@@ -1,10 +1,10 @@
 .taskmenu {
-    height: 100vh;
-    width: 25vw;
+    min-height: 100vh;
+    min-width: 25vw;
     background-color: rgb(212, 225, 238);
     z-index: 2;
     position: absolute;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .library p {
@@ -16,7 +16,7 @@
     font-weight: 750;
     font-size: 14px;
     color: rgb(114, 136, 158);
-    text-shadow: 0px -1px 0px whitesmoke, 0px 1px 0px grey;
+    text-shadow: 0px -1px 0px white, 0px 1px 1px black;
     cursor: default;
 }
 
@@ -33,17 +33,16 @@
     font-weight: 750;
     font-size: 14px;
     color: rgb(131, 155, 180);
-    text-shadow: 0px -1px 0px whitesmoke, 0px 1px 0px grey;
+    text-shadow: 0px -1px 0px white, 0px 1px 1px black;
     cursor:default
 }
 
 .playlist button {
     border-radius: 50%;
     margin-right: 10px;
-    border: none;
-    background-color: rgb(104, 255, 16);
-    box-shadow: 1.5px 1.5px 0px rgba(89, 133, 25, .8);
-    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    border: 3px dotted grey;
+    color: black;
     height: 24px;
     width: auto;
     cursor: pointer;
@@ -51,12 +50,11 @@
 
 .playlist button:hover {
     transition: 0s ease-out .1s;
-    text-shadow: 1px 1px 0px black; 
+    color: rgba(102, 119, 136, 1);
 }
 
 .playlist button:active {
     transition: 0s ease-out .1s;
-    background-color: green;
     box-shadow: none;
     text-shadow: none;
 }
@@ -129,7 +127,6 @@
     margin-bottom: 5px;
     text-shadow: 0px -1px 0px grey, 0px 1px 0px black;
     cursor: pointer;
-    z-index: 50;
 }
 
 .savePlaylist button:hover {
