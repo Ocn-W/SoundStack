@@ -4,12 +4,15 @@ import { SearchBarResult } from '../contexts/SearchBarContext';
 import { PlaylistContext } from '../contexts/PlaylistContext';
 
 export default function SearchBar() {
-    const { setSearchInput } = useContext(SearchBarResult);
-    const { searchInput } = useContext(SearchBarResult);
-    const { accessToken } = useContext(SearchBarResult);
-    const { setSongs } = useContext(SearchBarResult);
-    const { songs } = useContext(SearchBarResult);
-    const { isSearching } = useContext(SearchBarResult);
+    const { 
+      setSearchInput, 
+      searchInput, 
+      accessToken, 
+      setSongs, 
+      songs, 
+      isSearching 
+    } = useContext(SearchBarResult);
+    
     const {isPlaylistSelected} = useContext(PlaylistContext);
 
     async function search() {
@@ -25,7 +28,7 @@ export default function SearchBar() {
       const songList = await fetch(
         "https://api.spotify.com/v1/search?q=" + searchInput + "&type=track&limit=50",
         searchParams
-      )
+        )
         .then((response) => response.json())
         .then((data) => {
           isPlaylistSelected(false);  

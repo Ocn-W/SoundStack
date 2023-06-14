@@ -3,7 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import { CLIENT_ID, CLIENT_SECRET } from './Spotify';
 import { SearchBarResult } from './contexts/SearchBarContext';
-import {PlaylistContext} from './contexts/PlaylistContext';
+import {PlaylistContext, SonglistContext} from './contexts/PlaylistContext';
 import { ListNameContext } from './contexts/PlaylistContext';
 import './css/app.css';
 
@@ -14,7 +14,11 @@ function App() {
   const [showSearchResult, isSearching] = useState(false);
   const [showPlaylist, isPlaylistSelected] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
-  console.log(`${CLIENT_ID} ${CLIENT_SECRET}`);
+  const [savePlaylist, isSaving] = useState(false);
+  const [userPlaylist, addToPlaylist] = useState([]);
+  const [buildPlaylist, isBuildingPlaylist] = useState(false);
+  const [songsAdded, addSong] = useState([]);
+
   useEffect(() => {
     const authParams = {
       method: "POST",
@@ -44,15 +48,27 @@ function App() {
           setSongs,
           showSearchResult,
           isSearching,
+          songsAdded,
+          addSong
         }}>
-        <PlaylistContext.Provider value={{ showPlaylist, isPlaylistSelected }}>
+        <PlaylistContext.Provider 
+        value={{ 
+          showPlaylist, 
+          isPlaylistSelected, 
+          savePlaylist, 
+          isSaving, 
+          buildPlaylist, 
+          isBuildingPlaylist 
+        }}>
           <ListNameContext.Provider value={{ playlistName, setPlaylistName }}>
             <header>
               <Header />
             </header>
+            <SonglistContext.Provider value={{userPlaylist, addToPlaylist}}>
             <main>
               <Main />
             </main>
+            </SonglistContext.Provider>
           </ListNameContext.Provider>
         </PlaylistContext.Provider>
       </SearchBarResult.Provider>

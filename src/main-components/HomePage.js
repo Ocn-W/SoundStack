@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Welcome from './Welcome';
 import PlaylistPage from '../main-components/PlaylistPage';
-import SearchResult from '../main-components/SearchResult';
+import SearchResult from './SearchPage';
 import { PlaylistContext } from '../contexts/PlaylistContext';
 import { SearchBarResult } from '../contexts/SearchBarContext';
 
