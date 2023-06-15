@@ -1,7 +1,7 @@
-import styles from './css/mainpage.module.css';
-import styles2 from './css/taskMenu.module.css';
-import HomePage from './main-components/HomePage';
-import Playlist from './taskmenu-components/Playlist';
+import styles from "./css/mainpage.module.css";
+import styles2 from "./css/taskMenu.module.css";
+import HomePage from "./main-components/HomePage";
+import Playlist from "./taskmenu-components/Playlist";
 
 export default function Main() {
   return (

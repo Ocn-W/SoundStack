@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from '../css/mainpage.module.css';
+import React from "react";
+import styles from "../css/mainpage.module.css";
 
-export default function Songs({addNewSong, name, artist, album, artwork}) {
+export default function Songs({ addNewSong, name, artist, album, artwork }) {
   return (
     <>
       <div className={styles.songCard}>

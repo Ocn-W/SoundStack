@@ -24,7 +24,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
 .playlist p {
@@ -34,7 +34,7 @@
     font-size: 14px;
     color: rgb(131, 155, 180);
     text-shadow: 0px -1px 0px white, 0px 1px 1px black;
-    cursor:default
+    cursor: default
 }
 
 .playlist button {
@@ -130,7 +130,7 @@
 }
 
 .savePlaylist button:hover {
-    background-color:grey;
+    background-color: grey;
 }
 
 .savePlaylist button:active {
