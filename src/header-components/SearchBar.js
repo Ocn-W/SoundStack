@@ -41,14 +41,17 @@ export default function SearchBar() {
       });
   }
 
+  function handleKeyPress(event){
+    event.key === 'Enter' && search(searchInput)
+  }
+
   return (
     <div className={styles.searchbar}>
       <input
         type="search"
         placeholder="Search Spotify Library"
-        onChange={(event) => {
-          setSearchInput(event.target.value);
-        }}
+        onChange={(event) => {setSearchInput(event.target.value)}}
+        onKeyDown={handleKeyPress}
       />
       <button onClick={search}>Search Spotify</button>
     </div>

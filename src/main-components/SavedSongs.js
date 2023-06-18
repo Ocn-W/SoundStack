@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../css/mainpage.module.css";
 
-export default function SavedSongs({ name, artist, album, artwork }) {
+export default function SavedSongs({ name, artist, album, artwork, remove }) {
   return (
     <div className={styles.formPlaylistCard}>
       <img src={artwork} alt="Album Artwork"></img>
@@ -10,6 +10,7 @@ export default function SavedSongs({ name, artist, album, artwork }) {
         <p>Artist: {artist}</p>
         <p>Album: {album}</p>
       </div>
+      <button onClick={remove}>x</button>
     </div>
   );
 }

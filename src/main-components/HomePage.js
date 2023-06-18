@@ -13,7 +13,7 @@ export default function HomePage() {
   const { showPlaylist } = useContext(PlaylistContext);
   const { showSearchResult } = useContext(SearchBarResult);
   const { userPlaylist } = useContext(SonglistContext);
-  const { userPlaylistId, selectedPlaylistId } = useContext(GeneratePlaylist);
+  const { selectedPlaylistId } = useContext(GeneratePlaylist);
 
   const selectedPlaylist = userPlaylist.find(
     (playlist) => playlist.id === selectedPlaylistId

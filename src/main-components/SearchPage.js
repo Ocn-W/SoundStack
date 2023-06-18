@@ -45,6 +45,15 @@ export default function SearchPage() {
     isBuildingPlaylist(true);
   }
 
+  function removeSong(song) {
+    const updateList = songsAdded.filter(item => item.song !== song);
+    addSong(updateList);
+  }
+
+  function clearList() {
+    addSong([]);
+  }
+
   return (
     <>
       <div className={styles.searchResult}>
@@ -77,11 +86,13 @@ export default function SearchPage() {
                 artist={song.artist}
                 album={song.album}
                 artwork={song.artwork}
+                remove = {() => removeSong(song)}
               />
             ))}
         </div>
         <div className={styles.formPlaylistBtns}>
           <button onClick={handleSave}>Save Playlist</button>
+          <button onClick={clearList}>Clear Playlist</button>
           <button>Publish to Spotify</button>
         </div>
       </div>
