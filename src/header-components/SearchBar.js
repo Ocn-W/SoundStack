@@ -4,9 +4,7 @@ import { SearchBarResult } from "../contexts/SearchBarContext";
 import { PlaylistContext } from "../contexts/PlaylistContext";
 
 export default function SearchBar() {
-  const { setSearchInput, searchInput, accessToken, setSongs, isSearching } =
-    useContext(SearchBarResult);
-
+  const { setSearchInput, searchInput, accessToken, setSongs, isSearching } = useContext(SearchBarResult);
   const { isPlaylistSelected } = useContext(PlaylistContext);
 
   async function search() {

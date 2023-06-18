@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import styles from "../css/mainpage.module.css";
+import { SonglistContext } from "../contexts/PlaylistContext";
 
-export default function PlaylistPage({ playlistName, songList }) {
+export default function PlaylistPage({ playlistName, songList, deletePlaylist }) {
   const [playlistSongs, setSongList] = useState([]);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function PlaylistPage({ playlistName, songList }) {
       </div>
       <div className={styles.pageBtns}>
         <button>Edit Playlist Name</button>
-        <button>Delete Playlist</button>
+        <button onClick={deletePlaylist}>Delete Playlist</button>
         <button>Upload to Spotify</button>
       </div>
       <div className={styles.pageSongList}>

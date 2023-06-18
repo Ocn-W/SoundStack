@@ -12,12 +12,20 @@ import { SearchBarResult } from "../contexts/SearchBarContext";
 export default function HomePage() {
   const { showPlaylist } = useContext(PlaylistContext);
   const { showSearchResult } = useContext(SearchBarResult);
-  const { userPlaylist } = useContext(SonglistContext);
+  const { userPlaylist, addToPlaylist } = useContext(SonglistContext);
   const { selectedPlaylistId } = useContext(GeneratePlaylist);
 
   const selectedPlaylist = userPlaylist.find(
     (playlist) => playlist.id === selectedPlaylistId
   );
+
+  function deletePlaylist() {
+    console.log(userPlaylist)
+    const updatedUserPlaylist = userPlaylist.filter(item => item.id !== selectedPlaylist.id);
+    addToPlaylist(updatedUserPlaylist);
+    console.log(`Deleted Playlist ${selectedPlaylist.name}`)
+
+  }
 
   return (
     <>
@@ -25,6 +33,7 @@ export default function HomePage() {
         <PlaylistPage
           playlistName={selectedPlaylist.name}
           songList={selectedPlaylist.songs}
+          deletePlaylist ={deletePlaylist}
           key={selectedPlaylist.id}
         />
       ) : showSearchResult ? (
