@@ -20,11 +20,8 @@ export default function HomePage() {
   );
 
   function deletePlaylist() {
-    console.log(userPlaylist)
     const updatedUserPlaylist = userPlaylist.filter(item => item.id !== selectedPlaylist.id);
     addToPlaylist(updatedUserPlaylist);
-    console.log(`Deleted Playlist ${selectedPlaylist.name}`)
-
   }
 
   return (
@@ -35,6 +32,7 @@ export default function HomePage() {
           songList={selectedPlaylist.songs}
           deletePlaylist ={deletePlaylist}
           key={selectedPlaylist.id}
+          id={selectedPlaylist.id}
         />
       ) : showSearchResult ? (
         <SearchResult />
