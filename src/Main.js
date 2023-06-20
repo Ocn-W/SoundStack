@@ -3,7 +3,7 @@ import styles2 from "./css/taskMenu.module.css";
 import HomePage from "./main-components/HomePage";
 import Playlist from "./taskmenu-components/Playlist";
 
-export default function Main() {
+export default function Main({uploadPlaylist}) {
   return (
     <>
       <div className={styles2.taskmenu}>
@@ -15,7 +15,7 @@ export default function Main() {
         </div>
       </div>
       <div className={styles.main}>
-        <HomePage />
+        <HomePage uploadPlaylist={uploadPlaylist}/>
       </div>
     </>
   );

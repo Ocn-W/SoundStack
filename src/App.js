@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Main from "./Main";
-import { CLIENT_ID, CLIENT_SECRET } from "./Spotify";
+import { CLIENT_ID, CLIENT_SECRET, AUTH_ENDPOINT, REDIRECT_URI, RESPONSE_TYPE } from "./Spotify";
 import { SearchBarResult } from "./contexts/SearchBarContext";
 import {
   GeneratePlaylist,
@@ -25,9 +25,14 @@ function App() {
   const [buildPlaylist, isBuildingPlaylist] = useState(false);
   const [songsAdded, addSong] = useState([]);
 
-  //LOCAL STORAGE TIME
-  //i need to save the playlist list with picked songs in local storage
-  //and grab that to update the saved playlist page
+  useEffect(() => {
+    window.localStorage.setItem('User_Playlists', JSON.stringify(userPlaylist));
+  }, [userPlaylist])
+
+  useEffect(() => {
+    const userData = window.localStorage.getItem('User_Playlists', userPlaylist);
+    userData !== null && addToPlaylist(JSON.parse(userData));
+  }, [])
 
   useEffect(() => {
     const authParams = {
@@ -47,6 +52,19 @@ function App() {
       .then((data) => setAccessToken(data.access_token));
   }, []);
 
+  async function spotifyUpload() {
+    const getUserId = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+      body:
+        `${AUTH_ENDPOINT}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&show_dialog=true&scope=playlist-modify-public`
+    }
+    window.location.href = getUserId.body;
+  }
+  
   return (
     <>
       <SearchBarResult.Provider
@@ -60,8 +78,7 @@ function App() {
           isSearching,
           songsAdded,
           addSong,
-        }}
-      >
+        }}>
         <PlaylistContext.Provider
           value={{
             showPlaylist,
@@ -69,15 +86,13 @@ function App() {
             savePlaylist,
             isSaving,
             buildPlaylist,
-            isBuildingPlaylist,
-          }}
-        >
+            isBuildingPlaylist
+          }}>
           <ListNameContext.Provider
             value={{
               playlistName,
               setPlaylistName,
-            }}
-          >
+            }}>
             <header>
               <Header />
             </header>
@@ -85,18 +100,16 @@ function App() {
               value={{
                 userPlaylist,
                 addToPlaylist,
-              }}
-            >
+              }}>
               <GeneratePlaylist.Provider
                 value={{
                   userPlaylistId,
                   setPlaylistId,
                   selectedPlaylistId,
                   setSelectedId,
-                }}
-              >
+                }}>
                 <main>
-                  <Main />
+                  <Main uploadPlaylist={spotifyUpload}/>
                 </main>
               </GeneratePlaylist.Provider>
             </SonglistContext.Provider>

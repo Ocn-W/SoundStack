@@ -93,7 +93,6 @@ export default function SearchPage() {
         <div className={styles.formPlaylistBtns}>
           <button onClick={handleSave}>Save Playlist</button>
           <button onClick={clearList}>Clear Playlist</button>
-          <button>Publish to Spotify</button>
         </div>
       </div>
     </>

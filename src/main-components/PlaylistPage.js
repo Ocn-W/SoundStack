@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "../css/mainpage.module.css";
-import { SonglistContext } from "../contexts/PlaylistContext";
 
-export default function PlaylistPage({ playlistName, songList, deletePlaylist, id }) {
+export default function PlaylistPage({ playlistName, songList, deletePlaylist, uploadPlaylist, id }) {
   const [playlistSongs, setSongList] = useState([]);
   const [newPlaylistName, setNewName] = useState(playlistName);
   const [editName, isEditingName] = useState(false);
@@ -19,12 +18,10 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, i
   function handleNameChange(){
     isEditingName(true);
   }
-
   function handleSaveChange() {
     isEditingName(false);
     setNewName(newPlaylistName);
   }
-
   function handleInputChange(event) {
     setNewName(event.target.value);
   }
@@ -45,7 +42,7 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, i
           </div>
         ) : <button onClick={handleNameChange}>Edit Playlist Name</button>}
         <button onClick={deletePlaylist}>Delete Playlist</button>
-        <button>Upload to Spotify</button>
+        <button onClick={uploadPlaylist}>Upload to Spotify</button>
       </div>
       <div className={styles.pageSongList}>
         {playlistSongs.map((song, index) => (
