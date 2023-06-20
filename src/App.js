@@ -52,17 +52,17 @@ function App() {
       .then((data) => setAccessToken(data.access_token));
   }, []);
 
-  async function spotifyUpload() {
-    const getUserId = {
+  function spotifyLogin() {
+    const userAuth = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + accessToken,
       },
       body:
-        `${AUTH_ENDPOINT}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&show_dialog=true&scope=playlist-modify-public`
+        `${AUTH_ENDPOINT}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}/&show_dialog=true&scope=playlist-modify-public`
     }
-    window.location.href = getUserId.body;
+    window.location.href = userAuth.body;
   }
   
   return (
@@ -109,7 +109,7 @@ function App() {
                   setSelectedId,
                 }}>
                 <main>
-                  <Main uploadPlaylist={spotifyUpload}/>
+                  <Main userLogin={spotifyLogin}/>
                 </main>
               </GeneratePlaylist.Provider>
             </SonglistContext.Provider>

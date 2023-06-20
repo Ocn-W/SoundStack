@@ -1,10 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import styles from "../css/mainpage.module.css";
+import { PlaylistContext } from "../contexts/PlaylistContext";
 
-export default function PlaylistPage({ playlistName, songList, deletePlaylist, uploadPlaylist, id }) {
+export default function PlaylistPage({ playlistName, songList, deletePlaylist, playlistId }) {
   const [playlistSongs, setSongList] = useState([]);
   const [newPlaylistName, setNewName] = useState(playlistName);
   const [editName, isEditingName] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [spotifyPlaylistId, setPlaylistId] = useState(null);
+  const { isPlaylistSelected } = useContext(PlaylistContext);
 
   useEffect(() => {
     setSongList(songList);
@@ -24,6 +28,72 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, u
   }
   function handleInputChange(event) {
     setNewName(event.target.value);
+  }
+
+  async function uploadPlaylist() {
+    const urlParams = new URLSearchParams(window.location.hash.slice(1));
+    const accessToken = urlParams.get("access_token");
+
+    if (accessToken !== null) {
+      const userParams = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      };
+
+      const userDataResponse = await fetch(
+        "https://api.spotify.com/v1/me",
+        userParams
+      );
+      const userData = await userDataResponse.json();
+      setUserId(userData.id);
+
+      const playlistParams = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+        body: JSON.stringify({
+          name: playlistName,
+          public: true,
+        }),
+      };
+
+      const playlistResponse = await fetch(
+        `https://api.spotify.com/v1/users/${userId}/playlists`,
+        playlistParams
+      );
+      const playlistData = await playlistResponse.json();
+      setPlaylistId(playlistData.id);
+
+      const songlistParams = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+        body: JSON.stringify({
+          uris: songList.map((song) => song.song.uri),
+          position: 0,
+        }),
+      };
+
+      const songlistResponse = await fetch(
+        `https://api.spotify.com/v1/playlists/${spotifyPlaylistId}/tracks`,
+        songlistParams
+      );
+      const songlistData = await songlistResponse.json();
+      console.log(songlistData);
+
+      alert("Save successful :) Check your Spotify Playlist!");
+      
+    } else {
+      alert("Please log in to Spotify to upload your playlist!");
+      isPlaylistSelected(false);
+    }
   }
 
   return (

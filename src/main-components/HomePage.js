@@ -9,7 +9,7 @@ import {
 } from "../contexts/PlaylistContext";
 import { SearchBarResult } from "../contexts/SearchBarContext";
 
-export default function HomePage({uploadPlaylist}) {
+export default function HomePage({userLogin}) {
   const { showPlaylist } = useContext(PlaylistContext);
   const { showSearchResult } = useContext(SearchBarResult);
   const { userPlaylist, addToPlaylist } = useContext(SonglistContext);
@@ -32,13 +32,11 @@ export default function HomePage({uploadPlaylist}) {
           songList={selectedPlaylist.songs}
           deletePlaylist ={deletePlaylist}
           key={selectedPlaylist.id}
-          id={selectedPlaylist.id}
-          uploadPlaylist={uploadPlaylist}
-        />
+          playlistId={selectedPlaylist.id}/>
       ) : showSearchResult ? (
         <SearchResult />
       ) : (
-        <Welcome />
+        <Welcome login={userLogin}/>
       )}
     </>
   );
