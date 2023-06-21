@@ -47,7 +47,7 @@ function App() {
         CLIENT_SECRET,
     };
 
-    await fetch("https://accounts.spotify.com/api/token", authParams)
+    fetch("https://accounts.spotify.com/api/token", authParams)
       .then((result) => result.json())
       .then((data) => setAccessToken(data.access_token));
   }, []);
