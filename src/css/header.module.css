@@ -98,3 +98,37 @@
     border: 1px solid gray;
     box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
 }
+
+@media only screen and (max-width: 768px) {
+    .header {
+      padding-bottom: 10px;
+      height: 75px;
+    }
+  
+    .controls {
+      display: none;
+    }
+  
+    .logo {
+      margin-top: 20px;
+      margin-left: 65px;
+      padding: 0px 30px;
+      left: 0;
+      scale: 0.7;
+    }
+  
+    .logo h1 {
+      font-size: 1.2rem;
+    }
+  
+    .searchbar {
+      margin-right: 5px;
+      margin-top: 10px;
+      scale: 0.8;
+    }
+  
+    .searchbar button {
+      padding: 8px;
+      font-size: 12px;
+    }
+  }
