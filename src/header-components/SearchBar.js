@@ -7,6 +7,7 @@ export default function SearchBar() {
   const { setSearchInput, searchInput, accessToken, setSongs, isSearching } = useContext(SearchBarResult);
   const { isPlaylistSelected } = useContext(PlaylistContext);
 
+//Takes the searchInput value and gets a list of songs from Spotify
   async function search() {
     console.log("Searching for string " + searchInput);
     const searchParams = {
@@ -16,7 +17,7 @@ export default function SearchBar() {
         Authorization: "Bearer " + accessToken,
       },
     };
-
+//Shows 50 tracks based starting with most popular suggestion
     const songList = await fetch(
       "https://api.spotify.com/v1/search?q=" +
         searchInput +
@@ -27,6 +28,8 @@ export default function SearchBar() {
       .then((data) => {
         isPlaylistSelected(false);
         isSearching(true);
+//Once the data is recieved set the songs array with the data retrieved
+//and store them under relevant attributes
         return setSongs(
           data.tracks.items.map((track) => ({
             name: track.name,

@@ -25,6 +25,7 @@ function App() {
   const [buildPlaylist, isBuildingPlaylist] = useState(false);
   const [songsAdded, addSong] = useState([]);
 
+//Save to local storage whenever a playlist is added to userPlaylist
   useEffect(() => {
     window.localStorage.setItem('User_Playlists', JSON.stringify(userPlaylist));
   }, [userPlaylist])
@@ -34,6 +35,7 @@ function App() {
     userData !== null && addToPlaylist(JSON.parse(userData));
   }, [])
 
+//Retrieve Access Token from SpotifyAPI  
   useEffect(() => {
     const authParams = {
       method: "POST",
@@ -52,6 +54,7 @@ function App() {
       .then((data) => setAccessToken(data.access_token));
   }, []);
 
+//Redirects URL to authorize Spotify account
   function spotifyLogin() {
     const userAuth = {
       method: "POST",

@@ -17,6 +17,8 @@ export default function SearchPage() {
   const { songs, addSong, songsAdded } = useContext(SearchBarResult);
   const { buildPlaylist, isBuildingPlaylist } = useContext(PlaylistContext);
   const { userPlaylistId, setPlaylistId } = useContext(GeneratePlaylist);
+
+//Generate a random 20 character "id" to identify individual playlists
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const idLength = 20;

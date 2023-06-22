@@ -33,7 +33,7 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, p
   async function uploadPlaylist() {
     const urlParams = new URLSearchParams(window.location.hash.slice(1));
     const accessToken = urlParams.get("access_token");
-
+//Only works if user has authorized Spotify account
     if (accessToken !== null) {
       const userParams = {
         method: "GET",
@@ -42,14 +42,14 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, p
           Authorization: "Bearer " + accessToken,
         },
       };
-
+//Retrieve userId from SpotifyAPI
       const userDataResponse = await fetch(
         "https://api.spotify.com/v1/me",
         userParams
       );
       const userData = await userDataResponse.json();
       setUserId(userData.id);
-
+//Creates empty playlist with specified playlistName on Spotify
       const playlistParams = {
         method: "POST",
         headers: {
@@ -61,14 +61,13 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, p
           public: true,
         }),
       };
-
       const playlistResponse = await fetch(
         `https://api.spotify.com/v1/users/${userId}/playlists`,
         playlistParams
       );
       const playlistData = await playlistResponse.json();
       setPlaylistId(playlistData.id);
-
+//Populate empty playlist with songs selected from userPlaylist.songs (passed as songList prop)
       const songlistParams = {
         method: "POST",
         headers: {
@@ -87,9 +86,7 @@ export default function PlaylistPage({ playlistName, songList, deletePlaylist, p
       );
       const songlistData = await songlistResponse.json();
       console.log(songlistData);
-
       alert("Save successful :) Check your Spotify Playlist!");
-      
     } else {
       alert("Please log in to Spotify to upload your playlist!");
       isPlaylistSelected(false);

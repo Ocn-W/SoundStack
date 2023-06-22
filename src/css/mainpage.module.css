@@ -129,8 +129,7 @@
 .pageEditBtns {
     width: 100%;
     position: inherit;
-    margin-top: -30px;
-    margin-left: 170%;
+    margin-left: 100%;
 }
 
 .pageEditBtns button {
@@ -545,6 +544,18 @@
         margin-top: 5%;
         width: fit-content;
     }
+
+    .pageName input {
+        width: 250px;
+        margin-left: 5%;
+    }
+
+    .pageEditBtns {
+        width: 100%;
+        position: inherit;
+        margin-left: 100%;
+        top: -5px;
+    }
     
     .pageSongList {
         margin-left: 27px;
@@ -673,6 +684,11 @@
         width: fit-content;
     }
 
+    .pageName input {
+        width: 250px;
+        margin-left: 5%;
+    }
+
     .pageBtns {
         display: flex;
         flex-direction: row;
@@ -703,6 +719,13 @@
     .pageSongInfo {
         text-align: center;
         font-size: 8px;
+    }
+
+    .pageEditBtns {
+        width: 100%;
+        position: inherit;
+        margin-left: 100%;
+        top: -5px;
     }
 
     .pageSong button {
