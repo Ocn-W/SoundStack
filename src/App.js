@@ -11,7 +11,7 @@ import {
 import { ListNameContext } from "./contexts/PlaylistContext";
 import "./css/app.css";
 
-function App() {
+function App() {  
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [songs, setSongs] = useState([]);
@@ -20,23 +20,29 @@ function App() {
   const [selectedPlaylistId, setSelectedId] = useState("");
   const [playlistName, setPlaylistName] = useState("");
   const [savePlaylist, isSaving] = useState(false);
-  const [userPlaylistId, setPlaylistId] = useState([]);
-  const [userPlaylist, addToPlaylist] = useState([]);
+  const [userPlaylistId, setPlaylistId] = useState([]);  
+  const [userPlaylist, addToPlaylist] = useState(initListState);
   const [buildPlaylist, isBuildingPlaylist] = useState(false);
   const [songsAdded, addSong] = useState([]);
-
+  
 //Save to local storage whenever a playlist is added to userPlaylist
-  useEffect(() => {
-    window.localStorage.setItem('User_Playlists', JSON.stringify(userPlaylist));
-  }, [userPlaylist])
+useEffect(() => {
+  try {
+    localStorage.setItem('userPlaylists', JSON.stringify(userPlaylist));
+  } catch (error) {
+    console.error('Error saving user playlist to local storage:', error);
+  }
+}, [userPlaylist]);
 
-  useEffect(() => {
-    const userData = window.localStorage.getItem('User_Playlists', userPlaylist);
-    userData !== null && addToPlaylist(JSON.parse(userData));
-  }, [])
+//Load local storage data into userPlaylist array
+  function initListState() {
+    const userData = localStorage.getItem("userPlaylists");
+    return userData ? JSON.parse(userData) : [];
+  }
 
-//Retrieve Access Token from SpotifyAPI  
-  useEffect(() => {
+//Retrieve access token from SpotifyAPI
+useEffect(() => {
+  try {
     const authParams = {
       method: "POST",
       headers: {
@@ -52,7 +58,10 @@ function App() {
     fetch("https://accounts.spotify.com/api/token", authParams)
       .then((result) => result.json())
       .then((data) => setAccessToken(data.access_token));
-  }, []);
+  } catch (error) {
+    console.error('Error retrieving access token:', error);
+  }
+}, []);
 
 //Redirects URL to authorize Spotify account
   function spotifyLogin() {
